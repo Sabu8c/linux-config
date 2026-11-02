@@ -1,0 +1,53 @@
+# TO ADD TO .bashrc
+
+# Load shared aliases
+#if [ -f ~/.config/shell/aliases ]; then
+#    source ~/.config/shell/aliases
+#fi
+
+# Custom alias
+# Faster navigation
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+# Better directory listings (human-readable sizes, color, icons if supported)
+alias ls='ls --color=auto'
+alias ll='ls -lah'    # List all files in long format
+alias l='ls -CF'      # Compact list
+
+# Clean up
+alias c='clear'
+alias path='echo -e ${PATH//:/\\n}'  # Show PATH variables line-by-line
+
+# Networking
+alias myip='curl -s https://ifconfig.me && echo' # Get your public IP
+
+# Utilities
+# Cross-Platform Package Manager Aliases
+if command -v dnf &> /dev/null; then
+    # Fedora / RHEL
+    alias update='sudo dnf upgrade --refresh -y && flatpak update -y'
+    alias install='sudo dnf install'
+    alias remove='sudo dnf remove'
+elif command -v apt &> /dev/null; then
+    # Debian / Ubuntu / Mint
+    alias update='sudo apt update && sudo apt upgrade -y && flatpak update -y'
+    alias install='sudo apt install'
+    alias remove='sudo apt remove'
+elif command -v pacman &> /dev/null; then
+    # Arch Linux / Manjaro
+    alias update='sudo pacman -Syu && flatpak update -y'
+    alias install='sudo pacman -S'
+    alias remove='sudo pacman -R'
+fi
+
+# Screen
+alias ss='screen -S'
+alias sr='screen -r'
+
+# Tmux
+alias tmn='tmux new-session -s'
+alias tma='tmux attach -t'
+alias tmk='tmux -killsession -t'
+alias tml='tmux list-session'
